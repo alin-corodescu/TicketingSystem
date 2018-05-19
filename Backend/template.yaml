@@ -6,7 +6,7 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       Handler: addTicket/index.handler
-      Runtime: nodejs4.3
+      Runtime: nodejs6.10
       Description: ''
       MemorySize: 128
       Timeout: 15
@@ -15,7 +15,7 @@ Resources:
           Type: Api
           Properties:
             Path: /tickets
-            Method: ANY
+            Method: POST
   addTicketPermission:
     Type: 'AWS::Lambda::Permission'
     Properties:
@@ -23,6 +23,31 @@ Resources:
       FunctionName:
         'Fn::GetAtt':
           - addTicket
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        'Fn::Sub': 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:*/*/*/*'
+  getTicketsForUser:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: getTicketsForUser/index.handler
+      Runtime: nodejs6.10
+      Description: ''
+      MemorySize: 128
+      Timeout: 15
+      Events:
+        LambdaMicroservice:
+          Type: Api
+          Properties:
+            Path: /tickets
+            Method: GET
+  getTicketsForUserPermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName:
+        'Fn::GetAtt':
+          - getTicketsForUser
           - Arn
       Principal: apigateway.amazonaws.com
       SourceArn:

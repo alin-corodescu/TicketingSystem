@@ -1,0 +1,35 @@
+{
+    "getTicketsForUser": {
+        "apigateway": {
+            "path": "/tickets",
+            "method": {
+                "value": "GET",
+                "items": [
+                    "GET"
+                ]
+            }
+        },
+        "lambda": {}
+    },
+    "addTicket": {
+        "apigateway": {
+            "path": "/tickets",
+            "method": {
+                "value": "POST",
+                "items": [
+                    "GET",
+                    "POST",
+                    "PUT",
+                    "DELETE",
+                    "HEAD",
+                    "OPTIONS",
+                    "PATCH"
+                ]
+            },
+            "body": {
+                "to": "cristi",
+                "message": "Hello World!"
+            }
+        }
+    }
+}
