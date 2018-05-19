@@ -1,0 +1,11 @@
+.circle-list{
+    list-style-type:disc;
+}
+
+.circle-square{
+    list-style-type:square; 
+}
+
+.second-level-list{
+    margin-left:20px;
+}

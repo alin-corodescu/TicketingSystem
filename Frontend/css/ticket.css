@@ -1,0 +1,108 @@
+.main {
+  width: 40vw;
+  text-align: center;
+}
+.main-content{
+  margin: 50px 10px 20px 20px;
+  background-color: #b3b3b3;
+  border-radius: 20px;
+  overflow: scroll;
+  max-height: 85vh;
+}
+.side {
+  padding-left: 3%;
+  width: 60vw;
+}
+.side-content {
+  margin: 5vh 20px 20px 20px;
+  }
+.main,
+.side {
+  border-radius: 10px;
+  height: 100vh;
+}
+
+@media ( min-width : 600px ){
+	.flexbox {
+    display: -webkit-flex;
+    display: flex;
+	}
+  .main {
+    margin: 0 10px 0 0;
+  }
+}
+
+
+.container {
+    border-radius: 5px;
+    padding: 10px;
+    width: 95%;
+    margin-top:10px;
+}
+
+.container-left{
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+}
+.container-right{
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+/* Clear floats */
+.container::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+/* Style images */
+.container img {
+    max-width: 60px;
+    width: 100%;
+    margin: 0 20px 0 20px;
+    border-radius: 50%;
+}
+.container-left img{
+    float: left;
+}
+.container-right img{
+    float: right;
+}
+
+/* Style time text */
+.time {
+    color: #aaa;
+}
+
+
+.message{
+  margin: 0 5px 0 5px;
+}
+.message-left{
+  float:left;
+}
+
+.message-right{
+  float:right;
+}
+
+.container > div {
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.container > div > div {
+  flex-grow: 1;
+  width: 33%;
+  width: 100px;
+  height: 100px;
+}
+
+.container > div > div:nth-child(even) {
+  padding: 0px 20px 0px 20px;
+  width: 80%
+}
+.container > div > div:nth-child(odd) {
+  width: 10%;
+}
