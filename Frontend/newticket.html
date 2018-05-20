@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>New Ticket</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="imCase ID/png" href="images/icons/favicon.png"/>
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/newticket.css">
+</head>
+<body>
+
+
+	<div class="container-contact100">
+
+		<div class="wrap-contact100">
+			<form class="contact100-form validate-form">
+				<span class="contact100-form-title">
+					Create new ticket
+				</span>
+
+				<div class="wrap-input100 validate-input" 
+					data-validate="Please enter the name of the people to whom you want to send">
+					<input class="input100" type="text" name="name" placeholder="Receiver">
+					<span class="focus-input100"></span>
+				</div>
+
+
+				<div class="wrap-input100 validate-input" data-validate = "Please enter the deadline">
+					<input class="input100" type="number" name="deadline" onfocus="(this.type='date')" placeholder="Deadline">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="wrap-input100 validate-input" data-validate = "Please enter the ticket description">
+					<textarea class="input100" name="TicketDiscription" placeholder="Ticket Description"></textarea>
+					<span class="focus-input100"></span>
+				</div>
+
+				<span class="">Ticket priority</span>
+				<div class="wrap-input100 validate-input" data-validate = "Please enter the deadline">
+					<select class="select100">
+						<option value="1" selected>No priority</option>
+						<option value="2">Low priority</option>
+						<option value="3">Medium priority</option>
+						<option value="4">High priority</option>
+					</select>
+				</div>
+
+				<div id="container-selected-files">
+					<label for="file-upload" class="custom-file-upload">
+					    <i class="fa fa-cloud-upload"></i> Attachments Upload
+					</label>
+					<input id="file-upload" type="file"/>
+				</div>
+
+				<div class="container-form-btn">
+					<button class="form-btn">
+						<span>
+							<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+							Submit Ticket
+						</span>
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/select2/select2.min.js"></script>
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/newticket.js"></script>
+
+</body>
+</html>
