@@ -52,3 +52,29 @@ Resources:
       Principal: apigateway.amazonaws.com
       SourceArn:
         'Fn::Sub': 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:*/*/*/*'
+  getTicketDetails:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: getTicketDetails/index.handler
+      Runtime: nodejs6.10
+      Description: ''
+      MemorySize: 128
+      Timeout: 15
+      Role: 'arn:aws:iam::369068112778:role/cloud9-Backend-addTicketRole-AU5Z0A806O98'
+      Events:
+        LambdaMicroservice:
+          Type: Api
+          Properties:
+            Path: /tickets/{ticketId}
+            Method: GET
+  getTicketDetailsPermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName:
+        'Fn::GetAtt':
+          - getTicketDetails
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        'Fn::Sub': 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:*/*/*/*'
