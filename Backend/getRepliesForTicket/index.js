@@ -23,9 +23,9 @@ exports.handler = function(event, context, callback) {
     }
     
     if (access.checkUserHasAccess(username, ticketId)) {
-        replies = replies.getRepliesForTicket(ticketId)
+        var replies_list = replies.getRepliesForTicket(ticketId)
         
-        utils.normalResponse(JSON.stringify(replies), 200, callback)
+        utils.normalResponse(JSON.stringify(replies_list), 200, callback)
     }
     else {
         utils.normalResponse("Access denied", 403, callback)

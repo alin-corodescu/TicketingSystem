@@ -8,3 +8,4 @@ function updateTicket(ticketId, updateJson) {
 }
 
 exports.getTicketsByIds = getTicketsByIds
+exports.updateTicket = updateTicket
