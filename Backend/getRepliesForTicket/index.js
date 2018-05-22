@@ -4,7 +4,7 @@ const AWS = require("aws-sdk");
 
 const access = require("../shared/access")
 const utils = require("../shared/utils")
-const tickets = require("../shared/tickets")
+const replies = require("../shared/replies")
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
@@ -23,8 +23,9 @@ exports.handler = function(event, context, callback) {
     }
     
     if (access.checkUserHasAccess(username, ticketId)) {
-        var ticket = tickets.getTicketsByIds([ticketId]);
-        utils.normalResponse(JSON.stringify(ticket[0]), 200, callback)
+        replies = replies.getRepliesForTicket(ticketId)
+        
+        utils.normalResponse(JSON.stringify(replies), 200, callback)
     }
     else {
         utils.normalResponse("Access denied", 403, callback)

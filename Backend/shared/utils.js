@@ -16,5 +16,26 @@ function errorResponse(errorMessage, awsRequestId, callback) {
   });
 }
 
+function normalResponse(content, statusCode, callback) {
+    callback(null, {
+    statusCode: statusCode,
+    body: content,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+  });
+}
+
+function getUsernameForRequest(event, callback) {
+    var username = "Coro"
+    if (event.requestContext.hasOwnProperty("authorizer") && !event.requestContext.authorizer) {
+        console.log("Authorizer has not been set");
+        username = event.requestContext.authorizer.claims['cognito:username'];
+    }
+    
+    return username;
+}
+
 exports.defaultErrorHandler = defaultErrorHandler
 exports.errorResponse = errorResponse
+exports.normalResponse = normalResponse

@@ -1,0 +1,13 @@
+{
+    "getTicketDetails": {
+        "apigateway": {
+            "path": "/tickets/2",
+            "method": {
+                "value": "GET",
+                "items": [
+                    "GET"
+                ]
+            }
+        }
+    }
+}
