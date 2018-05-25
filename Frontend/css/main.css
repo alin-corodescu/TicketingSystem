@@ -189,7 +189,7 @@ iframe {
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
   border-radius: 31px;
-  background-color: #80b3ff;
+  background-color: #6c7ae0;
   pointer-events: none;
   
   -webkit-transition: all 0.4s;
@@ -203,3 +203,6 @@ iframe {
   width: calc(100% + 20px);
 }
 
+#page-content{
+  display:none;
+}

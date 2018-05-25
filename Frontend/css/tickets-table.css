@@ -84,7 +84,16 @@ body, html {
   display: table-cell;
 }
 
+.row:hover { 
+    background-color: #57b846;
+}
 
+#tickets-header{
+  cursor: auto;
+}
+#tickets-header:hover {
+  background-color: #6c7ae0;
+}
 @media screen and (max-width: 768px) {
   .cell {
     display: block;

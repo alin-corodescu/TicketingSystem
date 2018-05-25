@@ -1,4 +1,3 @@
-
 (function ($) {
     "use strict";
 
@@ -28,8 +27,10 @@
                 check=false;
             }
         }
-
-        return check;
+        if(check === true){
+            prepare_ticket_data();
+        }
+        return false;
     });
 
 
@@ -66,3 +67,33 @@
     
 
 })(jQuery);
+
+var files = []
+function prepare_ticket_data(){
+    values = {}
+    $('.input100').each(function(){
+        values[$(this).attr('name')] = $(this).val()
+   })
+    values['priority'] = $('.select100').find(":selected").text();
+    send_ticket_data(values,files);
+    window.location.replace('tickets.html');
+}
+
+ $('#file-upload').bind('change', function() { 
+ 	var fileName = $(this).val();
+ 	fileName = fileName.substring(fileName.lastIndexOf("\\") + 1, fileName.length);
+ 	var span = $('<div />\n').addClass('span-filename').html(fileName);
+ 	$('#container-selected-files').append(span);
+ 	var file = $('#file-upload').prop('files')[0];
+ 	if(file != undefined)
+ 		files.push(file);
+ })
+
+
+// BACKEND
+// -------------------------------------------------------------------------------------------------
+ function send_ticket_data(values, files){
+    //values represent a dictionary where key=field name, and dic[key]= data from the field
+    //files represents the name of the files, not the actually BLOB files
+    //most probably the files part will represent a feature
+ }

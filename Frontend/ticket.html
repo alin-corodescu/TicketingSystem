@@ -14,7 +14,6 @@
 	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
 	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
 	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
-
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 	<link rel="stylesheet" type="text/css" href="css/util.css">
@@ -22,104 +21,115 @@
 	<link rel="stylesheet" type="text/css" href="css/ticket.css">
 	<link rel="stylesheet" type="text/css" href="css/ticket-information-list.css">
 	<link rel="stylesheet" type="text/css" href="css/newticket.css">
+	<link rel="stylesheet" type="text/css" href="css/modal.css">
+	<link rel="stylesheet" type="text/css" href="css/loader.css">
+	
 </head>
 <body>
-	<div class="flexbox">
-		<section class="side">
-			<div class="side-content">
-				Ticket Information
-				<ul class="circle-list">
-				  <li>ID:</li>
-				  <li>Priority: </li>
-				  <li>Sender:</li>
-				  <li>Receivers:
-				  	<ul class="circle-square second-level-list">
-						<li>First Receiver</li>
-						<li>Second Receiver</li>
-					</ul>
-				  </li>
-				   <li>Description</li>
-					<ul class="circle-square second-level-list">
-						<li>
-							The proposed software product is liable to meet the required security needs of data center of cloud. Blowfish used for the encryption of file slices takes minimum time and has maximum throughput for encryption and decryption from other symmetric algorithms. The idea of splitting and merging adds on to meet the principle of data security. The hybrid approach when deployed in cloud environment makes the remote server more secure and thus, helps the cloud providers to fetch more trust of their users. For data security and privacy protection issues, the fundamental challenge of separation of sensitive data and access control is fulfilled. Cryptography technique translates original data into unreadable form. Cryptography technique is divided into symmetric key cryptography and public key cryptography.
-						</li>
-						<li>Attachments</li>
-							<ul class="circle-square second-level-list">
-								<li><a href="#"><u>Encryption.pptx</u></a></li>
-								<li><a href="#"><u>Azure.doc</u></a></li>
-							</ul>
-					</ul>
 
-				</ul>
-			</div>
-		</section>
-
-		<div class="main">
-			<div class="main-content">
-				Ticket Chat
-
-				<div class="container container-left">
-					<div>
-					<div><img src="images/icons/user.png" alt="Avatar"></div>
-					<div><p class="message message-left">TEST</p></div>
-					<div><span class="time">11:00</span></div>
-					</div>
-				</div>
-
-				<div class="container container-right">
-					<div>
-					<div><span class="time">11:00</span></div>
-					<div><p class="message message-right">TEST</p></div>
-					<div><img src="images/icons/user.png" alt="Avatar"></div>
-					</div>
-				</div>
-
-				<div class="container container-right">
-					<div>
-					<div><span class="time">11:00</span></div>
-					<div><p class="message message-right">TEST</p></div>
-					<div><img src="images/icons/user.png" alt="Avatar"></div>
-					</div>
-				</div>
-
-				<div class="container container-right">
-					<div>
-					<div><span class="time">11:00</span></div>
-					<div><p class="message message-right">TEST</p></div>
-					<div><img src="images/icons/user.png" alt="Avatar"></div>
-					</div>
-				</div>
-
-				<div class="container container-left">
-					<div>
-					<div><img src="images/icons/user.png" alt="Avatar"></div>
-					<div><p class="message message-left">TEST</p></div>
-					<div><span class="time">11:00</span></div>
-					</div>
-				</div>
-
-
-				<div class=container>
-					<div class="wrap-input100 validate-input" 
-							data-validate="Please enter the message you want to send">
-							<input class="input100" type="text" name="name" placeholder="Send your message">
-							<span class="focus-input100"></span>
-						</div>
-					<div class="container-form-btn">
-							<button class="form-btn">
-								<span>
-									<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
-									Send message
-								</span>
-							</button>
-					</div>
-				</div>
-			</div>
-			
+	<div class="loading" id="loader">
+		<div class="loading-text">
+			<span class="loading-text-words">L</span>
+			<span class="loading-text-words">O</span>
+			<span class="loading-text-words">A</span>
+			<span class="loading-text-words">D</span>
+			<span class="loading-text-words">I</span>
+			<span class="loading-text-words">N</span>
+			<span class="loading-text-words">G</span>
 		</div>
- 
 	</div>
-	
+
+	<div id="page-content">
+		<div class="flexbox">
+			<section class="side">
+				<div class="side-content">
+					<div class="side-content-title">
+					<h4>Ticket Information</h4>
+					</div>
+
+					<ul class="circle-list" id="ticket-information-list">
+						<li>
+							<span>Ticket priority</span>
+						  	<div class="receivers">
+								
+								<select class="select-ticket-information" name="priority">
+									<option value="1">No priority</option>
+									<option value="2">Low priority</option>
+									<option value="3">Medium priority</option>
+									<option value="4">High priority</option>
+								</select>
+							</div>
+						</li>
+						<li>
+							<span>Receivers</span>
+							<div class="receivers">
+								<select class="select-ticket-information" id="receivers-list">
+								</select>
+								
+								<button class="form-btn new-receiver-btn" id="add-contributor">
+									<span>
+										<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+										Add contributor
+									</span>
+								</button>
+								
+							</div>
+						</li>
+
+					</ul>
+				</div>
+			</section>
+
+			<div class="main">
+				<div class="main-content-title">
+					<h4>Ticket Thread Talk</h4>
+				</div>
+				<div class="main-content" id="ticket-log">
+					<div class=container>
+						<div class="wrap-input100 validate-input" 
+								data-validate="Please enter the message you want to send">
+								<input autocomplete="off" class="input100" type="text" name="name" placeholder="Send your message" id="chatMessage">
+								<span class="focus-input100"></span>
+							</div>
+						<div class="container-form-btn">
+								<button class="form-btn" onclick="sendMessage()">
+									<span>
+										<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+										Send message
+									</span>
+								</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div id="myModal" class="modal">
+				<div class="modal-content">
+					<div class="modal-header">
+						<span class="close">&times;</span>
+					</div>
+					<div class="modal-body">
+						<div class=container>
+							<p class="modal-description"> Adding a new person to this ticket will result in that person being able to work and communicate
+							on the respective task. Your action will be displayed on the ticket thread talk.</p>
+							<div class="wrap-input100 validate-input" 
+									data-validate="Please enter the message you want to send">
+									<input autocomplete="off" class="input100" type="text" name="name" placeholder="New contributor name">
+									<span class="focus-input100"></span>
+								</div>
+							<div class="container-form-btn">
+									<button class="form-btn">
+										<span>
+											<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+											Send
+										</span>
+									</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="vendor/bootstrap/js/popper.js"></script>
@@ -132,10 +142,13 @@
 
 	<script src="vendor/aws-cognito/aws-cognito-sdk.min.js"></script>
     <script src="vendor/aws-cognito/amazon-cognito-identity.min.js"></script>
-
-    <script src="js/main.js"></script>
 	<script src="js/config.js"></script>
     <script src="js/cognito-auth.js"></script>
+    <script src="js/auth-guard.js"></script>
+    
+    <script type="text/javascript" src="vendor/mustache/mustache.js"></script>
+    <script src="js/current-ticket.js"></script>
+    <script src="js/modal.js"></script>
 
 </body>
 </html>

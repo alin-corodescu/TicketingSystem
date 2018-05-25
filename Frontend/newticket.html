@@ -17,22 +17,17 @@
 	<link rel="stylesheet" type="text/css" href="css/newticket.css">
 </head>
 <body>
-
-
 	<div class="container-contact100">
-
 		<div class="wrap-contact100">
 			<form class="contact100-form validate-form">
 				<span class="contact100-form-title">
 					Create new ticket
 				</span>
-
 				<div class="wrap-input100 validate-input" 
 					data-validate="Please enter the name of the people to whom you want to send">
-					<input class="input100" type="text" name="name" placeholder="Receiver">
+					<input class="input100" type="text" name="receiver" placeholder="Receiver">
 					<span class="focus-input100"></span>
 				</div>
-
 
 				<div class="wrap-input100 validate-input" data-validate = "Please enter the deadline">
 					<input class="input100" type="number" name="deadline" onfocus="(this.type='date')" placeholder="Deadline">
@@ -81,8 +76,13 @@
 	<script src="vendor/daterangepicker/moment.min.js"></script>
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>
 	<script src="vendor/countdowntime/countdowntime.js"></script>
-	<script src="js/main.js"></script>
-	<script src="js/newticket.js"></script>
+	
+	<script src="vendor/aws-cognito/aws-cognito-sdk.min.js"></script>
+    <script src="vendor/aws-cognito/amazon-cognito-identity.min.js"></script>
+	<script src="js/new-ticket.js"></script>
+	<script src="js/config.js"></script>
+    <script src="js/cognito-auth.js"></script>
+	<script src="js/auth-guard.js"></script>
 
 </body>
 </html>

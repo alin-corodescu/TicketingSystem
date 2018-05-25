@@ -29,7 +29,6 @@ var App = window.App || {};
 
     App.authToken = new Promise(function fetchCurrentAuthToken(resolve, reject) {
         var cognitoUser = userPool.getCurrentUser();
-
         if (cognitoUser) {
             cognitoUser.getSession(function sessionCallback(err, session) {
                 if (err) {
