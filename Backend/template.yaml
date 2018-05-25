@@ -52,3 +52,133 @@ Resources:
       Principal: apigateway.amazonaws.com
       SourceArn:
         'Fn::Sub': 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:*/*/*/*'
+  getTicketDetails:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: getTicketDetails/index.handler
+      Runtime: nodejs6.10
+      Description: ''
+      MemorySize: 128
+      Timeout: 15
+      Role: 'arn:aws:iam::369068112778:role/cloud9-Backend-addTicketRole-AU5Z0A806O98'
+      Events:
+        LambdaMicroservice:
+          Type: Api
+          Properties:
+            Path: '/tickets/{ticketId}'
+            Method: GET
+  getTicketDetailsPermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName:
+        'Fn::GetAtt':
+          - getTicketDetails
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        'Fn::Sub': 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:*/*/*/*'
+  getRepliesForTicket:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: getRepliesForTicket/index.handler
+      Runtime: nodejs6.10
+      Description: ''
+      MemorySize: 128
+      Timeout: 15
+      Role: 'arn:aws:iam::369068112778:role/cloud9-Backend-addTicketRole-AU5Z0A806O98'
+      Events:
+        LambdaMicroservice:
+          Type: Api
+          Properties:
+            Path: '/replies/{ticketId}'
+            Method: GET
+  getRepliesForTicketPermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName:
+        'Fn::GetAtt':
+          - getRepliesForTicket
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        'Fn::Sub': 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:*/*/*/*'
+  updateTicket:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: updateTicket/index.handler
+      Runtime: nodejs6.10
+      Description: ''
+      MemorySize: 128
+      Timeout: 15
+      Role: 'arn:aws:iam::369068112778:role/cloud9-Backend-addTicketRole-AU5Z0A806O98'
+      Events:
+        LambdaMicroservice:
+          Type: Api
+          Properties:
+            Path: /ticket/{ticketId}
+            Method: POST
+  updateTicketPermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName:
+        'Fn::GetAtt':
+          - updateTicket
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        'Fn::Sub': 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:*/*/*/*'
+  addReply:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: addReply/index.handler
+      Runtime: nodejs6.10
+      Description: ''
+      MemorySize: 128
+      Timeout: 15
+      Role: 'arn:aws:iam::369068112778:role/cloud9-Backend-addTicketRole-AU5Z0A806O98'
+      Events:
+        LambdaMicroservice:
+          Type: Api
+          Properties:
+            Path: /replies/{ticketId}
+            Method: POST
+  addReplyPermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName:
+        'Fn::GetAtt':
+          - addReply
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        'Fn::Sub': 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:*/*/*/*'
+  updateAccessToTicket:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: updateAccessToTicket/index.handler
+      Runtime: nodejs6.10
+      Description: ''
+      MemorySize: 128
+      Timeout: 15
+      Role: 'arn:aws:iam::369068112778:role/cloud9-Backend-addTicketRole-AU5Z0A806O98'
+      Events:
+        LambdaMicroservice:
+          Type: Api
+          Properties:
+            Path: /access/{ticketId}
+            Method: PUT
+  updateAccessToTicketPermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName:
+        'Fn::GetAtt':
+          - updateAccessToTicket
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        'Fn::Sub': 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:*/*/*/*'

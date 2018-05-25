@@ -9,11 +9,7 @@ const tickets = require("../shared/tickets")
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = function(event, context, callback) {
-    var username = "Coro"
-    if (event.requestContext.hasOwnProperty("authorizer") && !event.requestContext.authorizer) {
-        console.log("Authorizer has not been set");
-        username = event.requestContext.authorizer.claims['cognito:username'];
-    }
+    var username = utils.getUsernameForRequest(event, callback)
     
     try {
         // Get the groups this user is part of
