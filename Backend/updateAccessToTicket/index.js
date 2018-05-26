@@ -33,6 +33,7 @@ exports.handler = function(event, context, callback) {
         utils.normalResponse("Access denied", 403, callback)
     })
     .then((data) => {
+        // todo add a reply to the thread
         utils.normalResponse(JSON.stringify(data), 200, callback)
     })
 };

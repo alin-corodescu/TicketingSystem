@@ -89,6 +89,27 @@ function checkUserHasAccess(user_id, ticket_id) {
 
 function updateAccessToTicket(ticketId, accessPolicy) {
     // Read the access policy and grant permissions to the necessary users
+    var user = accessPolicy.target;
+    var type = accessPolicy.type;
+    
+    if (type === "GRANT") {
+        return docClient.put({
+        TableName : "TicketsAccess",
+        Item : {
+            ticketId : ticketId,
+            username : user
+        }
+        }).promise()
+    }
+    else {
+        return docClient.delete({
+            TableName : "TicketsAccess",
+            Item : {
+                ticketId : ticketId,
+                username : user
+            }
+        }).promise()
+    }
 }
 
 exports.getGroupsForUser = getGroupsForUser

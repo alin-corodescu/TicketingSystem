@@ -4,7 +4,6 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 
 function getRepliesForTicket(ticketId) {
     // Query dynamoDB to return the groups of this user
-    
     var params = {
         TableName : "Replies",
         KeyConditionExpression: "ticketId = :ticket",
