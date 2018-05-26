@@ -39,3 +39,4 @@ function getUsernameForRequest(event, callback) {
 exports.defaultErrorHandler = defaultErrorHandler
 exports.errorResponse = errorResponse
 exports.normalResponse = normalResponse
+exports.getUsernameForRequest = getUsernameForRequest
