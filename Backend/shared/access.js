@@ -67,7 +67,24 @@ function getTicketsAccessibleBy(identifier_list) {
 }
 
 function checkUserHasAccess(user_id, ticket_id) {
-    return true;
+    // check if the user has access to the ticket,
+    // basically it has to query if the entry exists in the table
+    var params = {
+        TableName : "TicketsAccess",
+        Key: {
+            ticketId : ticket_id,
+            username : user_id
+        }
+    }
+    return docClient.get(params).promise()
+    .then((data) => {
+        return true;
+    })
+    .catch((err) => {
+        // assume the error is because the entry does not exist
+        console.log("error " + err)
+        return false;
+    })
 }
 
 function updateAccessToTicket(ticketId, accessPolicy) {

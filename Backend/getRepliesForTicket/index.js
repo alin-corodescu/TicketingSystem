@@ -22,12 +22,15 @@ exports.handler = function(event, context, callback) {
         }
     }
     
-    if (access.checkUserHasAccess(username, ticketId)) {
-        var replies_list = replies.getRepliesForTicket(ticketId)
-        
-        utils.normalResponse(JSON.stringify(replies_list), 200, callback)
-    }
-    else {
+    
+    access.checkUserHasAccess(username, ticketId)
+    .then((data) => {
+        return replies.getRepliesForTicket(ticketId)
+    } ,(err) => {
+        console.log(err);
         utils.normalResponse("Access denied", 403, callback)
-    }
+    })
+    .then((data) => {
+        utils.normalResponse(JSON.stringify(data), 200, callback)
+    })
 };

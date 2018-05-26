@@ -32,26 +32,6 @@ exports.handler = function(event, context, callback) {
         .catch((err) => {
            console.log("error: " + err); 
         });
-        // // Get the groups this user is part of
-        // let identifier_list = access.getGroupsForUser(username)
-        
-        // // Construct an identifier list
-        // identifier_list.push(username)
-        
-        // // Get all the ticket id's 
-        // let ticket_id_list = access.getTicketsAccessibleBy(identifier_list)
-        
-        // let ticket_list = tickets.getTicketsByIds(ticket_id_list);
-        
-        // // Return the tickets 
-        // callback(null, {
-        //     statusCode : 200,
-        //     body: JSON.stringify(ticket_list),
-        //     headers: {
-        //         'Access-Control-Allow-Origin': '*',
-        //         },
-        //     isBase64Encoded: false
-        //     });
     }
     catch (e) {
         utils.defaultErrorHandler(e, context, callback)

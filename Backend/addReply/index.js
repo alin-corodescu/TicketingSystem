@@ -24,12 +24,14 @@ exports.handler = function(event, context, callback) {
     
     var reply = JSON.parse(event.body);
     
-    if (access.checkUserHasAccess(username, ticketId)) {
-        var result = replies.addReplyToTicket(ticketId, reply.message , username)
-        
-        utils.normalResponse(JSON.stringify(result), 200, callback)
-    }
-    else {
+    access.checkUserHasAccess(username, ticketId)
+    .then((data) => {
+        return replies.addReplyToTicket(ticketId, reply.message , username)
+    } ,(err) => {
+        console.log(err);
         utils.normalResponse("Access denied", 403, callback)
-    }
+    })
+    .then((data) => {
+        utils.normalResponse(JSON.stringify(data), 200, callback)
+    })
 };

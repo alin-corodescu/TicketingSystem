@@ -25,12 +25,15 @@ exports.handler = function(event, context, callback) {
     
     var updateJson = JSON.parse(event.body);
     
-    if (access.checkUserHasAccess(username, ticketId)) {
-        var result = tickets.updateTicket(ticketId, updateJson)
-        
-        utils.normalResponse(JSON.stringify(result), 200, callback)
-    }
-    else {
+    
+    access.checkUserHasAccess(username, ticketId)
+    .then((data) => {
+        return tickets.updateTicket(ticketId, updateJson)
+    } ,(err) => {
+        console.log(err);
         utils.normalResponse("Access denied", 403, callback)
-    }
+    })
+    .then((data) => {
+        utils.normalResponse(JSON.stringify(data), 200, callback)
+    })
 };
