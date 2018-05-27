@@ -75,8 +75,11 @@ function prepare_ticket_data(){
         values[$(this).attr('name')] = $(this).val()
    })
     values['priority'] = $('.select100').find(":selected").text();
-    send_ticket_data(values,files);
-    window.location.replace('tickets.html');
+    console.log(values);
+    send_ticket_data(values,files).then((data) => {
+        console.log("Finished");
+        setTimeout(3000, () => {window.location.replace('tickets.html')})
+    });
 }
 
  $('#file-upload').bind('change', function() { 
@@ -93,24 +96,26 @@ function prepare_ticket_data(){
 // BACKEND
 // -------------------------------------------------------------------------------------------------
  function send_ticket_data(values, files){
-
+    console.log("Send ticket data called");
     var endpoint = _config.api.invokeUrl + "/tickets";
     var method = "POST";
     var token;
-    return Window.App.authToken
+    return WildRydes.authToken
         .then((data) => {token = data} )
+        .catch((err) => {console.log("Got an error while getting the token  " +err)})
         .then((data) => {
         //    Now make the call to the api
             return $.ajax({
                 method: method,
                 url: endpoint,
                 headers: {
-                    Authorization: token
+                    Authorization: token,
+                    "Access-Control-Allow-Origin" : "*"
                 },
                 data: JSON.stringify(values),
                 contentType: 'application/json'
             });
-        })
+        }).catch((err) => {console.log("got an error when adding the ticket " + err)})
     //values represent a dictionary where key=field name, and dic[key]= data from the field
     //files represents the name of the files, not the actually BLOB files
     //most probably the files part will represent a feature
