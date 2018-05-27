@@ -52,12 +52,19 @@
 							<span>Ticket priority</span>
 						  	<div class="receivers">
 								
-								<select class="select-ticket-information" name="priority">
+								<select class="select-ticket-information" name="priority" id="selectPriority">
 									<option value="1">No priority</option>
 									<option value="2">Low priority</option>
 									<option value="3">Medium priority</option>
 									<option value="4">High priority</option>
 								</select>
+
+								<button class="form-btn new-receiver-btn" id="updateTicketPriority" onclick="updateTicketPriority()">
+									<span>
+										<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+										Update Ticket Priority
+									</span>
+								</button>
 							</div>
 						</li>
 						<li>
@@ -69,7 +76,7 @@
 								<button class="form-btn new-receiver-btn" id="add-contributor">
 									<span>
 										<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
-										Add contributor
+										Edit contributors
 									</span>
 								</button>
 								
@@ -110,18 +117,35 @@
 					</div>
 					<div class="modal-body">
 						<div class=container>
-							<p class="modal-description"> Adding a new person to this ticket will result in that person being able to work and communicate
-							on the respective task. Your action will be displayed on the ticket thread talk.</p>
+							<p class="modal-description"> 
+							Adding a new person to this ticket will result in that person being able to work and communicateon the respective task. Your action will be displayed on the ticket thread talk.
+							</p>
 							<div class="wrap-input100 validate-input" 
 									data-validate="Please enter the message you want to send">
-									<input autocomplete="off" class="input100" type="text" name="name" placeholder="New contributor name">
+									<input autocomplete="off" class="input100" type="text" name="name" placeholder="New contributor name" id="addNewContributor">
 									<span class="focus-input100"></span>
 								</div>
 							<div class="container-form-btn">
-									<button class="form-btn">
+									<button class="form-btn" onclick="editContributor(0)">
 										<span>
 											<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
-											Send
+											Add
+										</span>
+									</button>
+							</div>
+							<p class="modal-description"> 
+							Removing a person from this ticket will result in that person being unable to continue working and communicating onthe respective task. Your action will be displayed on the ticket thread talk.
+							</p>
+							<div class="wrap-input100 validate-input" 
+									data-validate="Please enter the message you want to send">
+									<input autocomplete="off" class="input100" type="text" name="name" placeholder="Existing contributor name" id="removeExistingContributor">
+									<span class="focus-input100"></span>
+								</div>
+							<div class="container-form-btn">
+									<button class="form-btn" onclick="editContributor(1)">
+										<span>
+											<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+											Remove
 										</span>
 									</button>
 							</div>
