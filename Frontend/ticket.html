@@ -46,27 +46,7 @@
 					<div class="side-content-title">
 					<h4>Ticket Information</h4>
 					</div>
-
 					<ul class="circle-list" id="ticket-information-list">
-						<li>
-							<span>Ticket priority</span>
-						  	<div class="receivers">
-								
-								<select class="select-ticket-information" name="priority" id="selectPriority">
-									<option value="1">No priority</option>
-									<option value="2">Low priority</option>
-									<option value="3">Medium priority</option>
-									<option value="4">High priority</option>
-								</select>
-
-								<button class="form-btn new-receiver-btn" id="updateTicketPriority" onclick="updateTicketPriority()">
-									<span>
-										<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
-										Update Ticket Priority
-									</span>
-								</button>
-							</div>
-						</li>
 						<li>
 							<span>Receivers</span>
 							<div class="receivers">
@@ -82,8 +62,35 @@
 								
 							</div>
 						</li>
-
+						<li>
+							<span>Ticket priority</span>
+						  	<div class="receivers">
+								
+								<select class="select-ticket-information" name="priority" id="selectPriority">
+									<option value="1">No priority</option>
+									<option value="2">Low priority</option>
+									<option value="3">Medium priority</option>
+									<option value="4">High priority</option>
+								</select>
+							</div>
+						</li>
+						<li>
+							<span>Status</span>
+							<div class="receivers">
+								<select class="select-ticket-information" id="ticketStatus">
+									<option value="1">Pending</option>
+									<option value="2">Closed</option>
+								</select>
+							</div>
+						</li>
 					</ul>
+
+					<button class="form-btn new-receiver-btn" id="updateTicketPriority" onclick="updateTicket()">
+						<span>
+							<i class="fa fa-paper-plane-o m-r-6" aria-hidden="true"></i>
+							Update Ticket
+						</span>
+					</button>
 				</div>
 			</section>
 
