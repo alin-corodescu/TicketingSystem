@@ -117,7 +117,7 @@ Resources:
         LambdaMicroservice:
           Type: Api
           Properties:
-            Path: /ticket/{ticketId}
+            Path: '/ticket/{ticketId}'
             Method: POST
   updateTicketPermission:
     Type: 'AWS::Lambda::Permission'
@@ -143,7 +143,7 @@ Resources:
         LambdaMicroservice:
           Type: Api
           Properties:
-            Path: /replies/{ticketId}
+            Path: '/replies/{ticketId}'
             Method: POST
   addReplyPermission:
     Type: 'AWS::Lambda::Permission'
@@ -169,7 +169,7 @@ Resources:
         LambdaMicroservice:
           Type: Api
           Properties:
-            Path: /access/{ticketId}
+            Path: '/access/{ticketId}'
             Method: PUT
   updateAccessToTicketPermission:
     Type: 'AWS::Lambda::Permission'
@@ -178,6 +178,32 @@ Resources:
       FunctionName:
         'Fn::GetAtt':
           - updateAccessToTicket
+          - Arn
+      Principal: apigateway.amazonaws.com
+      SourceArn:
+        'Fn::Sub': 'arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:*/*/*/*'
+  getTicketAccessControlList:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: getTicketAccessControlList/index.handler
+      Runtime: nodejs6.10
+      Description: ''
+      MemorySize: 128
+      Timeout: 15
+      Role: 'arn:aws:iam::369068112778:role/cloud9-Backend-addTicketRole-AU5Z0A806O98'
+      Events:
+        LambdaMicroservice:
+          Type: Api
+          Properties:
+            Path: /access/{ticketId}
+            Method: GET
+  getTicketAccessControlListPermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName:
+        'Fn::GetAtt':
+          - getTicketAccessControlList
           - Arn
       Principal: apigateway.amazonaws.com
       SourceArn:

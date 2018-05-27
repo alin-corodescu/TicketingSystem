@@ -99,16 +99,16 @@ function checkUserHasAccess(user_id, ticket_id) {
             }
 
             return Promise.all(promises).then((results) => {
-                console.log("returning actual data " + results);
-                var hasAccess = results.some((x) => { return x === true })
-                if (hasAccess) 
-                    return Promise.resolve(true);
-                return Promise.reject(false);
-            },
-            (err) => {
-                console.log(err);
-                return false;
-            })
+                    console.log("returning actual data " + results);
+                    var hasAccess = results.some((x) => { return x === true })
+                    if (hasAccess)
+                        return Promise.resolve(true);
+                    return Promise.reject(false);
+                },
+                (err) => {
+                    console.log(err);
+                    return false;
+                })
         })
 
 }
@@ -140,7 +140,28 @@ function updateAccessToTicket(ticketId, accessPolicy) {
     }
 }
 
+function getUsersWhoCanAccessTicket(ticket_id) {
+    var params = {
+        TableName: "TicketsAccess",
+        IndexName: "ticketId-index",
+        KeyConditionExpression: "ticketId = :ticket_id",
+        ExpressionAttributeValues: {
+            ":ticket_id" : ticket_id
+        },
+        ProjectionExpression: "username"
+    }
+    var promise = docClient.query(params).promise()
+    .then((data) => {
+        return data.Items.map((x) => { return x.username })
+    })
+    .catch((err) => {
+        console.log("err on access getter " +err )
+    })
+    return promise;
+}
+
 exports.getGroupsForUser = getGroupsForUser
 exports.getTicketsAccessibleBy = getTicketsAccessibleBy
 exports.checkUserHasAccess = checkUserHasAccess
 exports.updateAccessToTicket = updateAccessToTicket
+exports.getUsersWhoCanAccessTicket = getUsersWhoCanAccessTicket

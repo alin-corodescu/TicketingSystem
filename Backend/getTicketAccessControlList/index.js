@@ -1,14 +1,10 @@
-'use strict';
-
-const AWS = require("aws-sdk");
 
 const access = require("../shared/access")
 const utils = require("../shared/utils")
-const replies = require("../shared/replies")
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
-exports.handler = function(event, context, callback) {
+exports.handler = (event, context, callback) => {
+    
     var username = utils.getUsernameForRequest(event, callback)
     
     var ticketId;
@@ -22,16 +18,15 @@ exports.handler = function(event, context, callback) {
         }
     }
     
-    
     access.checkUserHasAccess(username, ticketId)
     .then((data) => {
-        return replies.getRepliesForTicket(ticketId)
+        return access.getUsersWhoCanAccessTicket(ticketId)
     } ,(err) => {
         console.log(err);
         utils.normalResponse("Access denied", 403, callback)
     })
     .then((data) => {
-        console.log("received data " + data);
+        console.log("got data " + data)
         utils.normalResponse(JSON.stringify(data), 200, callback)
     })
 };

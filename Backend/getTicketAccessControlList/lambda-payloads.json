@@ -1,0 +1,13 @@
+{
+    "getTicketAccessControlList": {
+        "apigateway": {
+            "path": "/access/1",
+            "method": {
+                "value": "GET",
+                "items": [
+                    "GET"
+                ]
+            }
+        }
+    }
+}
