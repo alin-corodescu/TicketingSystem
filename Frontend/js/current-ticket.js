@@ -202,7 +202,8 @@ function editContributor(usecase){
 	}
 }
 
-function updateTicketPriority(){
-	var priority = $('.select-ticket-information').find(":selected").text();
-	alert(selectPriority);
+
+function updateTicket(){
+	var priority = $('#selectPriority').find(":selected").text();
+	var status = $('#ticketStatus').find(":selected").text();
 }
