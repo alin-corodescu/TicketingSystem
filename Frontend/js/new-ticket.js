@@ -93,6 +93,24 @@ function prepare_ticket_data(){
 // BACKEND
 // -------------------------------------------------------------------------------------------------
  function send_ticket_data(values, files){
+
+    var endpoint = _config.api.invokeUrl + "/tickets";
+    var method = "POST";
+    var token;
+    return Window.App.authToken
+        .then((data) => {token = data} )
+        .then((data) => {
+        //    Now make the call to the api
+            return $.ajax({
+                method: method,
+                url: endpoint,
+                headers: {
+                    Authorization: token
+                },
+                data: JSON.stringify(values),
+                contentType: 'application/json'
+            });
+        })
     //values represent a dictionary where key=field name, and dic[key]= data from the field
     //files represents the name of the files, not the actually BLOB files
     //most probably the files part will represent a feature
