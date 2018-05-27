@@ -34,9 +34,8 @@ function addReplyToTicket(ticketId, reply, sender) {
         Item: wrappedReply
     }
     return docClient.put(params).promise()
-    // Add the wrapped Reply to dynamo now
-    
 } 
+
 
 function wrapReply(message, sender) {
     var reply = {};

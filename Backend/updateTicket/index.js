@@ -39,6 +39,6 @@ exports.handler = function(event, context, callback) {
         return replies.addReplyToTicket(ticketId, log, "SYSTEM");
     })
     .then((data) => {
-        utils.normalResponse(JSON.stringify(data), 200, callback)
+        utils.normalResponse(JSON.stringify(data), 200, callback);
     })
 };
