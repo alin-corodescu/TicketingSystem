@@ -117,7 +117,7 @@ Resources:
         LambdaMicroservice:
           Type: Api
           Properties:
-            Path: '/ticket/{ticketId}'
+            Path: '/tickets/{ticketId}'
             Method: POST
   updateTicketPermission:
     Type: 'AWS::Lambda::Permission'
