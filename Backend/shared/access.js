@@ -82,9 +82,13 @@ function checkUserHasAccess(user_id, ticket_id) {
                         username: identifiers[i]
                     }
                 }
+                console.log("Querying for " + identifiers[i])
                 var promise = docClient.get(params).promise()
                     .then((data) => {
-                        return true;
+                        console.log("Query response data" + JSON.stringify(data))
+                        if (data.Item)
+                            return true;
+                        return false;
                     })
                     .catch((err) => {
                         // assume the error is because the entry does not exist
@@ -95,8 +99,16 @@ function checkUserHasAccess(user_id, ticket_id) {
             }
 
             return Promise.all(promises).then((results) => {
-                return results.some((x) => { return x === true })
-            } )
+                console.log("returning actual data " + results);
+                var hasAccess = results.some((x) => { return x === true })
+                if (hasAccess) 
+                    return Promise.resolve(true);
+                return Promise.reject(false);
+            },
+            (err) => {
+                console.log(err);
+                return false;
+            })
         })
 
 }
@@ -118,11 +130,13 @@ function updateAccessToTicket(ticketId, accessPolicy) {
     else {
         return docClient.delete({
             TableName: "TicketsAccess",
-            Item: {
+            Key: {
                 ticketId: ticketId,
                 username: user
             }
-        }).promise()
+        }).promise().catch((err) => {
+            console.log("deletion error " + err)
+        })
     }
 }
 

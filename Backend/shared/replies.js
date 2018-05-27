@@ -39,7 +39,7 @@ function addReplyToTicket(ticketId, reply, sender) {
 } 
 
 function wrapReply(message, sender) {
-    var reply;
+    var reply = {};
     reply.message = message;
     reply.sender = sender;
     reply.date = new Date().toISOString()

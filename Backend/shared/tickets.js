@@ -30,17 +30,24 @@ function getTicketsByIds(ticket_id_list) {
 
 function updateTicket(ticketId, updateJson) {
     // Updates the ticket with the update Json
+    console.log(updateJson);
     var columns = Object.keys(updateJson)
+    console.log(columns)
     var updateExp = "set ";
     var expAttrValues = {};
+    var expAttrNames = {};
     for (var i = 0 ; i < columns.length ; i++) {
-        updateExp += columns[i] + " = " + ":" + columns[i];
+        console.log(columns[i])
+        updateExp += "#" + columns[i] + " = " + ":" + columns[i];
         if (i < columns.length - 1) {
             updateExp += ", "
         }
-        
-        expAttrValues[columns[i]] = updateJson.columns[i]
+        console.log(updateExp);
+        expAttrValues[":" + columns[i]] = updateJson[columns[i]]
+        expAttrNames["#" + columns[i]] = columns[i];
     }
+    console.log(updateExp);
+    console.log(expAttrValues);
     var params = {
         TableName: "Tickets",
         Key:{
@@ -48,10 +55,14 @@ function updateTicket(ticketId, updateJson) {
         },
         UpdateExpression : updateExp,
         ExpressionAttributeValues : expAttrValues,
+        ExpressionAttributeNames : expAttrNames,
         ReturnValues: "UPDATED_NEW"
     }
     
     return docClient.update(params).promise()
+    .catch((err) => {
+        console.log("update on ticket error : " + err);
+    })
     
 }
 

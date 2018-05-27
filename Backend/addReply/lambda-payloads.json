@@ -1,0 +1,16 @@
+{
+    "addReply": {
+        "apigateway": {
+            "path": "/replies/2",
+            "method": {
+                "value": "POST",
+                "items": [
+                    "POST"
+                ]
+            },
+            "body": {
+                "message": "Salut"
+            }
+        }
+    }
+}
