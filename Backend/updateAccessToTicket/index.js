@@ -34,6 +34,8 @@ exports.handler = function(event, context, callback) {
     })
     .then((data) => {
         // todo add a reply to the thread
+        var log = "The user " + username +  " has updated the ticket access policy by " + JSON.stringify(accessPolicy);
+        replies.addReplyToTicket(ticketId, log, "SYSTEM");
         utils.normalResponse(JSON.stringify(data), 200, callback)
     })
 };

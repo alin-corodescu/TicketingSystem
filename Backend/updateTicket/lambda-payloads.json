@@ -10,7 +10,7 @@
                 ]
             },
             "body": {
-                "status": "open",
+                "status": "closed",
                 "message": "A_modified"
             }
         }

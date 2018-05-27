@@ -35,6 +35,10 @@ exports.handler = function(event, context, callback) {
     })
     .then((data) => {
         // todo add a reply to the thread
+        var log = "The user " + username +  " has updated the ticket with " + JSON.stringify(updateJson);
+        return replies.addReplyToTicket(ticketId, log, "SYSTEM");
+    })
+    .then((data) => {
         utils.normalResponse(JSON.stringify(data), 200, callback)
     })
 };
