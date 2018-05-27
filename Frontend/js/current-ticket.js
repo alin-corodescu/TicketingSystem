@@ -2,6 +2,11 @@ var ticket_information, ticket_log;
 var ticketID = getParameterByName("ticketID");
 start(ticketID);
 
+function start(ticketID){
+	[ticket_information, ticket_log] = start_getting_data();
+	start_rendering();
+}
+
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -123,7 +128,7 @@ function start_rendering(){
 
 	render_ticket_history();
 
-	window.setTimeout(dissmissLoader, 3000);
+	dissmissLoader();
 }
 
 function select_current_priority(){
@@ -140,11 +145,6 @@ function add_receivers(){
 		}
 		$("#receivers-list").append(Mustache.render(receiver_template, data));
 	}
-}
-
-function start(ticketID){
-	[ticket_information, ticket_log] = start_getting_data();
-	start_rendering();
 }
 
 // BACKEND
@@ -184,4 +184,26 @@ function sendMessage(){
 	if(message != "")
 		console.log(message);
 	//sending message to endpoint
+}
+
+function editContributor(usecase){
+	var contributor = "";
+	if(usecase === 0)
+	{
+		contributor = document.getElementById('addNewContributor').value;
+		// check if not already in list of contributors
+		// if he is not already in, send it to endpoint
+	}
+	if(usecase === 1)
+	{
+		contributor = document.getElementById('removeExistingContributor').value;
+		// check if in list of contributors
+		// if he is, send it to endpoint
+	}
+}
+
+
+function updateTicket(){
+	var priority = $('#selectPriority').find(":selected").text();
+	var status = $('#ticketStatus').find(":selected").text();
 }

@@ -24,7 +24,7 @@
     background-color: #c4d3f6;
     width: 40%;
     left: 30%;
-    top: 30%;
+    top: 5%;
 }
 
 /* The Close Button */
@@ -60,5 +60,5 @@
 
 .modal-description{
     padding-left: 10px;
-    margin-bottom: 10px;
+    margin: 10px 0px 10px 0px;
 }
