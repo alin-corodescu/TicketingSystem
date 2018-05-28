@@ -5,7 +5,7 @@ function defaultErrorHandler(err, context, callback) {
 
 function errorResponse(errorMessage, awsRequestId, callback) {
   callback(null, {
-    statusCode: 500,
+    statusCode: 502,
     body: JSON.stringify({
       Error: errorMessage,
       Reference: awsRequestId,
@@ -28,8 +28,8 @@ function normalResponse(content, statusCode, callback) {
 
 function getUsernameForRequest(event, callback) {
     var username = "Coro"
-    if (event.requestContext.hasOwnProperty("authorizer") && !event.requestContext.authorizer) {
-        console.log("Authorizer has not been set");
+    if (event.requestContext.hasOwnProperty("authorizer") && event.requestContext.authorizer) {
+        console.log("Authorizer has been set");
         username = event.requestContext.authorizer.claims['cognito:username'];
     }
     
