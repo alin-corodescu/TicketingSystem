@@ -78,7 +78,7 @@ function prepare_ticket_data(){
     console.log(values);
     send_ticket_data(values,files).then((data) => {
         console.log("Finished");
-        setTimeout(3000, () => {window.location.replace('tickets.html')})
+        window.location.replace('tickets.html');
     });
 }
 
@@ -107,15 +107,15 @@ function prepare_ticket_data(){
         //    Now make the call to the api
             return $.ajax({
                 method: method,
+                crossDomain : true,
                 url: endpoint,
                 headers: {
-                    Authorization: token,
-                    "Access-Control-Allow-Origin" : "*"
+                    Authorization: token
                 },
                 data: JSON.stringify(values),
                 contentType: 'application/json'
             });
-        }).catch((err) => {console.log("got an error when adding the ticket " + err)})
+        }).catch((err) => {console.log("got an error when adding the ticket " + JSON.stringify(err))})
     //values represent a dictionary where key=field name, and dic[key]= data from the field
     //files represents the name of the files, not the actually BLOB files
     //most probably the files part will represent a feature
