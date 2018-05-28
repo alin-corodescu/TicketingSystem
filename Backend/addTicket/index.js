@@ -10,7 +10,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 exports.handler = function(event, context, callback) {
     
     var username = utils.getUsernameForRequest(event, callback);
-
+    
     // the event parameter contains what I have as parameter to the function
     console.log(event)
     var newTicketData = JSON.parse(event.body)
@@ -29,7 +29,7 @@ exports.handler = function(event, context, callback) {
             body: JSON.stringify(newTicketData),
             headers: {
                 'Access-Control-Allow-Origin': '*',
-                },
+            },
             isBase64Encoded: false
             });
         }).catch((err) => { console.log("inner catch called"); utils.defaultErrorHandler(err, context, callback)});
@@ -53,7 +53,7 @@ function storeTicket(ticketData) {
 }
 
 function basicAccessForTicket(ticketData, context, callback) {
-    var to = ticketData.to
+    var to = ticketData.receiver
     var from = ticketData.from
     var tid = ticketData.ticketId;
     
