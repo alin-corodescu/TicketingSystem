@@ -198,6 +198,7 @@ function editContributor(usecase){
 	{
 		contributor = document.getElementById('removeExistingContributor').value;
 		// check if in list of contributors
+
 		// if he is, send it to endpoint
 	}
 }
