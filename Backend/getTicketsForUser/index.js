@@ -27,7 +27,8 @@ exports.handler = function(event, context, callback) {
             return tickets.getTicketsByIds(ticket_id_list);
         })
         .then((actualTickets) => {
-            utils.normalResponse(JSON.stringify(actualTickets), 200, callback);
+            var unwrapped_tickets = actualTickets.map((item) => { return item.Item})
+            utils.normalResponse(JSON.stringify(unwrapped_tickets), 200, callback);
         })
         .catch((err) => {
            console.log("error: " + err); 
