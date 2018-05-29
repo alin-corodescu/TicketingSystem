@@ -74,14 +74,41 @@ function get_tickets_headers(){
 	var headers = ['Case ID', 'Description', 'Priority', 'Emiter', 'Start Date','Deadline', 'Status']
 	return headers;
 }
+// Dictionary object translating from header title to field name in the json stored in the database
+var headerToJsonMapping = {
+	"Case Id" : "ticketId",
+	"Description" : "message",
+	"Priority" : "priority",
+	"Emiter" : "from",
+	"Start Date" : "openDate",
+	"Deadline" : "deadline",
+	"Status" : "status"
+};
+
+function JsonToRowData(ticket) {
+	var row_data = [];
+	var headers = get_tickets_headers();
+	for (var i in headers) {
+		if (ticket.hasOwnProperty(headerToJsonMapping[headers[i]])) {
+			row_data.push(ticket[headerToJsonMapping[headers[i]]]);
+		}
+		else {
+            row_data.push("N/A");
+        }
+	}
+	return row_data;
+}
 
 function get_tickets_records(){
+	// create a function which maps a json to a record
+
+	// Tickets for me will get the ticket list from the API
+	var ticketsForMe;
+    var rows_data;
+
+	for (var t in ticketsForMe) {
+		rows_data.push(JsonToRowData(ticketsForMe[t]));
+	}
 	// returns a 2D array where each 1d array represents a record. Order must match headers
-	var rows_data = 
-	[
-		['1', 'Cloud Project','1', 'Lenuta Alboaie','15.04.2018', '30.05.2018', 'Pending'],
-		['2', 'Cloud Project','1', 'Lenuta Alboaie','15.04.2018', '30.05.2018', 'Pending'],
-		['3', 'Cloud Project','1', 'Lenuta Alboaie','15.04.2018', '30.05.2018', 'Pending']
-	]
 	return rows_data;
 }
