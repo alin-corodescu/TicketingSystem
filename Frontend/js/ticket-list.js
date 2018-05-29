@@ -58,7 +58,7 @@ function assemble_table_data(rows_data, row_template) {
                 }
             html = html + Mustache.render(row_template, data);
         }
-        html = '<div class="row" onclick="redirectToTicketDetails(' + '\"' + String(rows_data[i][0]) + '\"' + ')">' + html + '</div>'
+        html = '<div class="row" onclick="redirectToTicketDetails('  + String(rows_data[i][0])  + ')">' + html + '</div>'
         $("#tickets-table").append(html);
     }
 }
