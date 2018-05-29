@@ -30,6 +30,7 @@ exports.handler = function(event, context, callback) {
         utils.normalResponse("Access denied", 403, callback)
     })
     .then((data) => {
-        utils.normalResponse(JSON.stringify(data[0]), 200, callback)
+        var unwrapped_tickets = data.map((item) => { return item.Item})
+        utils.normalResponse(JSON.stringify(unwrapped_tickets[0]), 200, callback)
     })
 };
