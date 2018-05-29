@@ -22,6 +22,7 @@ get_tickets_records()
         assemble_table_data(rows_data, row_template);
     });
 
+// todo dismiss loader in a nicer manner
 window.setTimeout(dissmissLoader, 3000);
 
 function dissmissLoader() {

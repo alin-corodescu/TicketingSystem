@@ -11,6 +11,7 @@ start(ticketID);
 //     .catch((err) => {
 //         console.log("Got an error while getting the token  " + err)
 //     })
+//TODO we need to handle the e-mails somehow, the username can be != from the e-mail : for example the username = "demo", need to configure everything properly tho
 
 function start(ticketID) {
     start_getting_data(ticketID)
@@ -76,6 +77,7 @@ function render_ticket_information_step2() {
     $("#ticket-information-list").append(Mustache.render(ticket_description_template, data));
 }
 
+// todo remove attachaments all together
 function render_ticket_information_step3() {
     var ticket_attachments_template = ['<li><a href="#"><u>{{Attachment}}</u></a></li>'].join("\n");
 
@@ -123,6 +125,7 @@ function render_ticket_history() {
                 'Timestamp': ticket_log[i]['Timestamp']
 
             }
+            // todo create a logic based on who added the last reply -> if (current_sender != last_sender) switch sides.
         if (data['Sender'] === 'Mos Craciun')
             $("#ticket-log").prepend(Mustache.render(chat_message_right_template, data));
         else
@@ -161,6 +164,7 @@ function add_receivers() {
     }
 }
 
+// todo create a way to handle access denied erros (easiest will be redirect to ticket list page + some message
 // BACKEND
 // --------------------------------------------------------------------------------------------------
 function start_getting_data(ticketID) {
@@ -171,7 +175,6 @@ function start_getting_data(ticketID) {
         'Deadline': 'deadline',
         'Priority': 'priority',
         'Description': 'TicketDiscription',
-        // Todo add receiver field
     };
     var ticket_history_model = {
         'Message': 'message',
