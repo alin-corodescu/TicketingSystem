@@ -13,6 +13,7 @@ function errorResponse(errorMessage, awsRequestId, callback) {
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
+    isBase64Encoded: false
   });
 }
 
@@ -23,11 +24,12 @@ function normalResponse(content, statusCode, callback) {
     headers: {
       'Access-Control-Allow-Origin': '*',
     },
+    isBase64Encoded: false
   });
 }
 
 function getUsernameForRequest(event, callback) {
-    var username = "Coro"
+    var username = "demo-at-yahoo.com"
     if (event.requestContext.hasOwnProperty("authorizer") && event.requestContext.authorizer) {
         console.log("Authorizer has been set");
         username = event.requestContext.authorizer.claims['cognito:username'];
