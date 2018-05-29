@@ -7,8 +7,10 @@ var ticket_details_page = "ticket.html";
 headers = get_tickets_headers();
 assemle_table_headers(headers, header_template);
 
-rows_data = get_tickets_records();
-assemble_table_data(rows_data, row_template);
+get_tickets_records()
+	.then((rows_data) => {
+        assemble_table_data(rows_data, row_template);
+	});
 
 window.setTimeout(dissmissLoader, 3000);
 
@@ -75,9 +77,12 @@ function get_tickets_headers(){
 	return headers;
 }
 // Dictionary object translating from header title to field name in the json stored in the database
+// Todo check that the values match the ones sent in the new-ticket values JSON
+// Ticket DISCRIPTION for the win
+//
 var headerToJsonMapping = {
-	"Case Id" : "ticketId",
-	"Description" : "message",
+	"Case ID" : "ticketId",
+	"Description" : "TicketDiscription",
 	"Priority" : "priority",
 	"Emiter" : "from",
 	"Start Date" : "openDate",
@@ -88,11 +93,14 @@ var headerToJsonMapping = {
 function JsonToRowData(ticket) {
 	var row_data = [];
 	var headers = get_tickets_headers();
+	console.log(JSON.stringify(ticket));
+	console.log(headers);
 	for (var i in headers) {
 		if (ticket.hasOwnProperty(headerToJsonMapping[headers[i]])) {
 			row_data.push(ticket[headerToJsonMapping[headers[i]]]);
 		}
 		else {
+			console.log("current ticket doesn't have field : " + headerToJsonMapping[headers[i]]);
             row_data.push("N/A");
         }
 	}
@@ -103,12 +111,33 @@ function get_tickets_records(){
 	// create a function which maps a json to a record
 
 	// Tickets for me will get the ticket list from the API
+    var endpoint = _config.api.invokeUrl + "/tickets";
 	var ticketsForMe;
-    var rows_data;
+	var token;
+	var method = "GET";
 
-	for (var t in ticketsForMe) {
-		rows_data.push(JsonToRowData(ticketsForMe[t]));
-	}
-	// returns a 2D array where each 1d array represents a record. Order must match headers
-	return rows_data;
+    return WildRydes.authToken
+        .then((data) => {token = data} )
+        .catch((err) => {console.log("Got an error while getting the token  " +err)})
+        .then((data) => {
+            //    Now make the call to the api
+            return $.ajax({
+                method: method,
+                crossDomain : true,
+                url: endpoint,
+                headers: {
+                    Authorization: token
+                }
+            });
+        }).catch((err) => {console.log("got an error when getting the tickets " + JSON.stringify(err))})
+		.then((tickets) => {
+			console.log("Received tickets: " + JSON.stringify(tickets));
+            var rows_data = [];
+            for (var t in tickets) {
+                rows_data.push(JsonToRowData(tickets[t]));
+            }
+            // returns a 2D array where each 1d array represents a record. Order must match headers
+            return rows_data;
+		})
+
 }
