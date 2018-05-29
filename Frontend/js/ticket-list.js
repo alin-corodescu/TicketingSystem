@@ -4,15 +4,15 @@ var ticket_details_page = "ticket.html";
 
 [header_template, row_template] = generate_templates()
 
-var token;
-
-WildRydes.authToken
-    .then((data) => {
-        token = data
-    })
-    .catch((err) => {
-        console.log("Got an error while getting the token  " + err)
-    });
+// var token;
+//
+// WildRydes.authToken
+//     .then((data) => {
+//         token = data
+//     })
+//     .catch((err) => {
+//         console.log("Got an error while getting the token  " + err)
+//     });
 
 headers = get_tickets_headers();
 assemle_table_headers(headers, header_template);

@@ -2,15 +2,15 @@ var ticket_information, ticket_log;
 var ticketID = getParameterByName("ticketID");
 start(ticketID);
 
-var token;
-
-WildRydes.authToken
-    .then((data) => {
-        token = data
-    })
-    .catch((err) => {
-        console.log("Got an error while getting the token  " + err)
-    })
+// var token;
+//
+// WildRydes.authToken
+//     .then((data) => {
+//         token = data
+//     })
+//     .catch((err) => {
+//         console.log("Got an error while getting the token  " + err)
+//     })
 
 function start(ticketID) {
     start_getting_data(ticketID)
@@ -183,6 +183,8 @@ function start_getting_data(ticketID) {
     var ticket_history = [];
     var method = "GET";
     var endpoint = _config.api.invokeUrl + "/tickets/" + ticketID;
+
+
     return $.ajax({
         method: method,
         crossDomain: true,
@@ -192,7 +194,7 @@ function start_getting_data(ticketID) {
         }
     }).then((ticket_data) => {
         // Now we need to map the ticket data to the model
-        console.log("ticket data " + ticket_data);
+        console.log("ticket data " + JSON.stringify(ticket_data));
         Object.keys(ticket_details_model).forEach((key, index) => {
             // the model will contain the mapping to the JSON values stored on the backend
             if (ticket_data.hasOwnProperty(ticket_details_model[key])) {
@@ -215,8 +217,9 @@ function start_getting_data(ticketID) {
         });
     })
         .then((receivers) => {
-            console.log("Ticket receivers " + receivers);
-            ticket_details.receivers = receivers;
+            console.log("Ticket receivers " + JSON.stringify(receivers));
+            ticket_details.Receivers = [];
+            ticket_details.Receivers = ticket_details.Receivers.concat(receivers);
 
             endpoint = _config.api.invokeUrl + "/replies/" + ticketID;
             // Now get the receivers field
@@ -244,6 +247,8 @@ function start_getting_data(ticketID) {
                 });
                 ticket_history.push(convertedMessage);
             }
+            console.log("ticket_details = " + JSON.stringify(ticket_details));
+            console.log("ticket_history = " + JSON.stringify(ticket_history));
             return [ticket_details, ticket_history];
         })
 }
@@ -318,6 +323,7 @@ function updateTicket() {
         priority : priority,
         status : status
     };
+    var endpoint = _config.api.invokeUrl + "/tickets/" + ticketID;
     $.ajax({
         method: "POST",
         crossDomain: true,

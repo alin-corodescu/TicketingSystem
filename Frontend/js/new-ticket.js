@@ -68,11 +68,6 @@
 
 })(jQuery);
 
-var token;
-
-WildRydes.authToken
-    .then((data) => {token = data} )
-    .catch((err) => {console.log("Got an error while getting the token  " +err)})
 
 var files = []
 function prepare_ticket_data(){
