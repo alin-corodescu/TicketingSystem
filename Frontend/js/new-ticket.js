@@ -68,6 +68,7 @@
 
 })(jQuery);
 
+
 var files = []
 function prepare_ticket_data(){
     values = {}
@@ -99,23 +100,21 @@ function prepare_ticket_data(){
     console.log("Send ticket data called");
     var endpoint = _config.api.invokeUrl + "/tickets";
     var method = "POST";
-    var token;
-    return WildRydes.authToken
-        .then((data) => {token = data} )
-        .catch((err) => {console.log("Got an error while getting the token  " +err)})
-        .then((data) => {
-        //    Now make the call to the api
-            return $.ajax({
-                method: method,
-                crossDomain : true,
-                url: endpoint,
-                headers: {
-                    Authorization: token
-                },
-                data: JSON.stringify(values),
-                contentType: 'application/json'
-            });
-        }).catch((err) => {console.log("got an error when adding the ticket " + JSON.stringify(err))})
+
+     //    Now make the call to the api
+     return $.ajax({
+         method: method,
+         crossDomain: true,
+         url: endpoint,
+         headers: {
+             Authorization: token
+         },
+         data: JSON.stringify(values),
+         contentType: 'application/json'
+     })
+         .catch((err) => {
+             console.log("got an error when adding the ticket " + JSON.stringify(err))
+         })
     //values represent a dictionary where key=field name, and dic[key]= data from the field
     //files represents the name of the files, not the actually BLOB files
     //most probably the files part will represent a feature
