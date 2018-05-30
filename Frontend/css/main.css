@@ -206,3 +206,13 @@ iframe {
 #page-content{
   display:none;
 }
+
+.elipsis-text {
+  white-space:nowrap; 
+  overflow:hidden;
+}
+.elipsis-text:hover{
+  overflow: visible;
+  width: auto;
+  overflow-wrap: break-word;
+}

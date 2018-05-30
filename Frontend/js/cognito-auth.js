@@ -56,7 +56,7 @@ var App = window.App || {};
         };
         var attributeEmail = new AmazonCognitoIdentity.CognitoUserAttribute(dataEmail);
 
-        userPool.signUp(toUsername(email), password, [attributeEmail], null,
+        userPool.signUp(email, password, [attributeEmail], null,
             function signUpCallback(err, result) {
                 if (!err) {
                     onSuccess(result);
@@ -69,7 +69,7 @@ var App = window.App || {};
 
     function signin(email, password, onSuccess, onFailure) {
         var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails({
-            Username: toUsername(email),
+            Username: email,
             Password: password
         });
 
@@ -93,14 +93,11 @@ var App = window.App || {};
 
     function createCognitoUser(email) {
         return new AmazonCognitoIdentity.CognitoUser({
-            Username: toUsername(email),
+            Username: email,
             Pool: userPool
         });
     }
 
-    function toUsername(email) {
-        return email.replace('@', '-at-');
-    }
 
     /*
      *  Event Handlers
@@ -140,6 +137,7 @@ var App = window.App || {};
             }
         };
         var onFailure = function registerFailure(err) {
+            console.log("ON FAILURE !")
             alert(err);
         };
         event.preventDefault();

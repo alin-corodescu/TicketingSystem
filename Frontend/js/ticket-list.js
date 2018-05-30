@@ -20,10 +20,9 @@ assemle_table_headers(headers, header_template);
 get_tickets_records()
     .then((rows_data) => {
         assemble_table_data(rows_data, row_template);
+        setRowColors();
+        dissmissLoader();
     });
-
-// todo dismiss loader in a nicer manner
-window.setTimeout(dissmissLoader, 3000);
 
 function dissmissLoader() {
     document.getElementById("loader").style.display = "none";
@@ -39,7 +38,7 @@ function generate_templates() {
 
     var row_template =
         [
-            '<div class="cell" data-title="{{header}}">',
+            '<div class="cell {{header}}" data-title="{{header}}">',
             '{{data}}',
             '</div>\n'
         ].join("\n");
@@ -62,6 +61,30 @@ function assemble_table_data(rows_data, row_template) {
         html = '<div class="row" onclick="redirectToTicketDetails('  + '&quot;'+ String(rows_data[i][0])  + '&quot;' + ')">' + html + '</div>'
         $("#tickets-table").append(html);
     }
+}
+
+function setRowColors(){
+    $( ".Priority" ).each(function( index ) {
+        var parent = $(this).parent();
+        var value = $(this).text().trim();
+        console.log(value);
+        switch (value) {
+            case "No priority":
+                parent.css( "background-color", "#ACF5D2");  
+                break;
+            case "Low priority":
+                parent.css( "background-color", "#79F2C0");
+                break;
+            case "Medium priority":
+                parent.css( "background-color", "#36B37E");
+                parent.children().css( "color", "white");
+                break;
+            case "High priority":
+                parent.css( "background-color", "#006644");
+                parent.children().css( "color", "white");
+                break;
+        }
+    });
 }
 
 function redirectToTicketDetails(ticketID) {

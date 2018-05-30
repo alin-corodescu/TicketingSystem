@@ -64,9 +64,6 @@ function render_ticket_information_step2() {
         '<li>Description</li>',
         '<ul class="circle-square second-level-list">',
         '<li>{{Description}}</li>',
-        '<li>Attachments</li>',
-        '<ul class="circle-square second-level-list" id="attachments-list">',
-        '</ul>',
         '</ul>'
     ].join("\n");
 
@@ -77,26 +74,13 @@ function render_ticket_information_step2() {
     $("#ticket-information-list").append(Mustache.render(ticket_description_template, data));
 }
 
-// todo remove attachaments all together
-function render_ticket_information_step3() {
-    var ticket_attachments_template = ['<li><a href="#"><u>{{Attachment}}</u></a></li>'].join("\n");
-
-    for (var i = 0; i < ticket_information['Attachments'].length; i++) {
-        data =
-            {
-                'Attachment': ticket_information['Attachments'][i]
-            }
-        $("#attachments-list").append(Mustache.render(ticket_attachments_template, data));
-    }
-}
-
 function render_ticket_history() {
     var chat_message_right_template = [
         '<span class="">{{Timestamp}}</span>',
         '<div class="container container-right flexbox">',
         '<div class="side2">',
         '<img src="images/icons/user.png" alt="Avatar">',
-        '<span id="senderName">{{Sender}}</span>',
+        '<span class="elipsis-text" id="senderName">{{Sender}}</span>',
         '</div>',
         '<div class="main2">',
         '<p class="message message-left">{{Message}}</p>',
@@ -112,24 +96,31 @@ function render_ticket_history() {
         '</div>',
         '<div class="side2">',
         '<img src="images/icons/user.png" alt="Avatar">',
-        '<span id="senderName">{{Sender}}</span>',
+        '<span class="elipsis-text" id="senderName">{{Sender}}</span>',
         '</div>',
         '</div>',
     ].join("\n");
+   
+    if(ticket_log.length > 0){
+        var template = chat_message_left_template;
+        var last_sender = ticket_log[0]['Sender'];
+        for (var i = 0; i < ticket_log.length; i++) {
+            data =
+                {
+                    'Sender': ticket_log[i]['Sender'],
+                    'Message': ticket_log[i]['Message'],
+                    'Timestamp': ticket_log[i]['Timestamp']
 
-    for (var i = 0; i < ticket_log.length; i++) {
-        data =
-            {
-                'Sender': ticket_log[i]['Sender'],
-                'Message': ticket_log[i]['Message'],
-                'Timestamp': ticket_log[i]['Timestamp']
-
-            }
-            // todo create a logic based on who added the last reply -> if (current_sender != last_sender) switch sides.
-        if (data['Sender'] === 'Mos Craciun')
-            $("#ticket-log").prepend(Mustache.render(chat_message_right_template, data));
-        else
-            $("#ticket-log").prepend(Mustache.render(chat_message_left_template, data));
+                }
+            if(last_sender != data['Sender'])
+                if(template == chat_message_left_template)
+                    template = chat_message_right_template;
+                else
+                    if(template == chat_message_right_template)
+                    template = chat_message_left_template;
+            $("#ticket-log").prepend(Mustache.render(template, data));
+            last_sender = data['Sender'];
+        }
     }
 
 }
@@ -138,9 +129,9 @@ function render_ticket_history() {
 function start_rendering() {
     render_ticket_information_step1()
     render_ticket_information_step2()
-    render_ticket_information_step3()
 
     select_current_priority();
+    select_current_status();
     add_receivers();
 
     render_ticket_history();
@@ -149,8 +140,29 @@ function start_rendering() {
 }
 
 function select_current_priority() {
-    priority = ticket_information['Priority']
-    $('select[name=priority] option:eq(' + priority + ')').attr('selected', 'selected');
+    $('#selectPriority option').filter(function(){
+        return ($(this).text() == ticket_information['Priority']);
+    }).prop('selected', true);
+}
+
+function select_current_status() {
+    $('#ticketStatus option').filter(function(){
+        return ($(this).text() == ticket_information['status']);
+    }).prop('selected', true);
+}
+
+function showSuccesAlert(){
+  $(".myAlert-succes").show();
+  setTimeout(function(){
+    $(".myAlert-succes").hide(); 
+  }, 2000);
+}
+
+function showErrorAlert(){
+  $(".myAlert-bottom").show();
+  setTimeout(function(){
+    $(".myAlert-eror").hide(); 
+  }, 2000);
 }
 
 function add_receivers() {
@@ -175,6 +187,7 @@ function start_getting_data(ticketID) {
         'Deadline': 'deadline',
         'Priority': 'priority',
         'Description': 'TicketDiscription',
+        'status' : 'status',
     };
     var ticket_history_model = {
         'Message': 'message',
@@ -273,9 +286,11 @@ function sendMessage() {
         contentType: 'application/json'
     }).then((data) => {
         console.log("Reply succesfully registered " + data);
-        //todo add a refresh of the replies section
+        showSuccesAlert();
+        setTimeout(function(){ location.reload();}, 2000);
     }).catch((err) => {
         console.log("Error occured while adding the reply " + err);
+        showErrorAlert();
     })
 
 }
@@ -311,9 +326,13 @@ function editContributor(usecase) {
         contentType: 'application/json'
     }).then((data) => {
         console.log("Access succesfully modified " + data);
-        //todo add a refresh of the ticket details section
+        modal.style.display = "none";
+        showSuccesAlert();
+        setTimeout(function(){ location.reload();}, 2000);
     }).catch((err) => {
         console.log("Error occured while modifying access " + err);
+        modal.style.display = "none";
+        showErrorAlert();
     })
 
 }
@@ -338,8 +357,10 @@ function updateTicket() {
         contentType: 'application/json'
     }).then((data) => {
         console.log("Ticket data succesfully modified " + data);
-        //todo add a refresh of the ticket details section
+        showSuccesAlert();
+        setTimeout(function(){ window.location.href = 'tickets.html';}, 2000);
     }).catch((err) => {
         console.log("Error occured while modifying ticket data " + err);
+        showErrorAlert();
     })
 }

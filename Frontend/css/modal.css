@@ -62,3 +62,27 @@
     padding-left: 10px;
     margin: 10px 0px 10px 0px;
 }
+
+
+.myAlert-succes{
+    border-radius: 20px;
+    background-color: #66ff66;
+    position: fixed;
+    width: 40%;
+    left: 30%;
+    top: 5%;
+}
+
+.myAlert-error{
+    border-radius: 20px;
+    background-color: #ff8080;
+    position: fixed;
+    width: 40%;
+    left: 30%;
+    top: 5%;
+}
+
+
+.alert{
+    display: none;
+}
