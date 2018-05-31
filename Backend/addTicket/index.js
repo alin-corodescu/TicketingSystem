@@ -17,6 +17,7 @@ exports.handler = function(event, context, callback) {
     
     // set the necessary fields for the ticket
     newTicketData.ticketId = uuid();
+    newTicketData.status = "Pending";
     newTicketData.openDate = new Date().toISOString();
     
     setFromData(newTicketData, username);
