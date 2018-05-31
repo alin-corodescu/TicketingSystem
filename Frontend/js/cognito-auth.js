@@ -61,6 +61,7 @@ var App = window.App || {};
                 if (!err) {
                     onSuccess(result);
                 } else {
+                    console.log(err);
                     onFailure(err);
                 }
             }
