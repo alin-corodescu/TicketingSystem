@@ -1,0 +1,17 @@
+{
+    "updateAccessToTicket": {
+        "apigateway": {
+            "path": "/access/2",
+            "method": {
+                "value": "PUT",
+                "items": [
+                    "PUT"
+                ]
+            },
+            "body": {
+                "status": "open",
+                "message": "A_modified"
+            }
+        }
+    }
+}

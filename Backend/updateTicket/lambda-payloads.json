@@ -1,0 +1,18 @@
+{
+    "updateTicket": {
+        "lambda": {},
+        "apigateway": {
+            "path": "/ticket/2",
+            "method": {
+                "value": "POST",
+                "items": [
+                    "POST"
+                ]
+            },
+            "body": {
+                "status": "closed",
+                "message": "A_modified"
+            }
+        }
+    }
+}

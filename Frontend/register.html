@@ -4,7 +4,7 @@
 	<title>Ticketing Log in</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
@@ -15,9 +15,9 @@
 	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/login-register.css">
 </head>
 <body>
-	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -30,7 +30,7 @@
 				<form class="login100-form validate-form" id="registrationForm">
 					<div class="wrap-input100 validate-input m-b-26" data-validate="Email is required">
 						<span class="label-input100">Email</span>
-						<input type="email" id="emailInputRegister" placeholder="Email" required>
+						<input type="text" id="emailInputRegister" placeholder="Email" required>
 						<span class="focus-input100"></span>
 					</div>
 
@@ -46,9 +46,9 @@
 						<span class="focus-input100"></span>
 					</div>
 
-					<div class="container-login100-form-btn">
-						<button type="submit" value="submit" class="login100-form-btn">
-							Register
+					<div class="container-form-btn">
+						<button type="submit" value="submit" class="form-btn">
+							Sign up
 						</button>
 					</div>
 				</form>
@@ -56,7 +56,6 @@
 		</div>
 	</div>
 	
-
 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 	<script src="vendor/bootstrap/js/popper.js"></script>
 	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -65,7 +64,6 @@
 	<script src="vendor/daterangepicker/moment.min.js"></script>
 	<script src="vendor/daterangepicker/daterangepicker.js"></script>
 	<script src="vendor/countdowntime/countdowntime.js"></script>
-	<script src="js/main.js"></script>
 
 	<script src="vendor/aws-cognito/aws-cognito-sdk.min.js"></script>
     <script src="vendor/aws-cognito/amazon-cognito-identity.min.js"></script>

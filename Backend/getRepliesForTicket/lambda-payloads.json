@@ -1,0 +1,13 @@
+{
+    "getRepliesForTicket": {
+        "apigateway": {
+            "path": "/replies/3",
+            "method": {
+                "value": "GET",
+                "items": [
+                    "GET"
+                ]
+            }
+        }
+    }
+}
